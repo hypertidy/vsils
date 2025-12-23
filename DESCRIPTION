@@ -19,3 +19,5 @@ Imports:
     purrr,
     tibble,
     tools
+URL: https://github.com/hypertidy/vsils
+BugReports: https://github.com/hypertidy/vsils/issues
