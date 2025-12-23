@@ -12,6 +12,7 @@ knitr::opts_chunk$set(
 
 # vsils
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/hypertidy/vsils/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/hypertidy/vsils/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Scan CRAN packages for GDAL-readable files — without downloading anything.

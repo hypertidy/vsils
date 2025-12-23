@@ -3,6 +3,7 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/hypertidy/vsils/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/hypertidy/vsils/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Scan CRAN packages for GDAL-readable files — without downloading
@@ -56,7 +57,7 @@ The `dsn` column works with any GDAL-based tool:
 res <- scan_package("spData")
 gpkg <- res$dsn[res$driver == "GPKG"][1]
 
-sf::st_read(gpkg, quiet = TRUE)
+terra::vect(gpkg)
 ```
 
 No download required — GDAL streams the data directly from CRAN.
