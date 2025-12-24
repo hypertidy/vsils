@@ -18,8 +18,6 @@ jobs:
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      # Prevent gdalraster from trying to download GDAL
-      GDALRASTER_USE_SYSTEM_GDAL: true
 
     steps:
       - uses: actions/checkout@v4
@@ -94,12 +92,4 @@ jobs:
           tag_name: catalog
           name: CRAN Spatial Data Catalog
           files: scranned.parquet
-          body: |
-            Catalog of GDAL-readable files in CRAN packages.
-
-            Built with GDAL ubuntu-full-latest (all drivers).
-
-            Download and query:
-```r
-            arrow::read_parquet("https://github.com/hypertidy/vsils/releases/download/catalog/scranned.parquet")
-```
+          body: "Catalog of GDAL-readable files in CRAN packages. Built with GDAL ubuntu-full-latest. Download: arrow::read_parquet('https://github.com/hypertidy/vsils/releases/download/catalog/scranned.parquet')"
