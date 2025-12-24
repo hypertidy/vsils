@@ -1,0 +1,79 @@
+name: Scan CRAN packages
+
+on:
+  schedule:
+    - cron: '0 3 * * *'  # 3am UTC daily
+  workflow_dispatch:
+    inputs:
+      batch_size:
+        description: 'Number of packages to scan'
+        default: '100'
+        required: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: |
+            any::arrow
+            any::gh
+            local::.
+
+      - name: Download previous catalog
+        run: |
+          Rscript -e '
+            url <- tryCatch({
+              rel <- gh::gh("GET /repos/{owner}/{repo}/releases/tags/{tag}",
+                            owner = "hypertidy", repo = "vsils", tag = "catalog")
+              idx <- which(sapply(rel$assets, \(a) a$name) == "scranned.parquet")
+              if (length(idx)) rel$assets[[idx]]$browser_download_url else stop("no asset")
+            }, error = function(e) NULL)
+
+            if (!is.null(url)) {
+              download.file(url, "scranned.parquet", mode = "wb")
+              message("Downloaded existing catalog")
+            } else {
+              message("No existing catalog, starting fresh")
+              arrow::write_parquet(
+                tibble::tibble(
+                  package = character(),
+                  version = character(),
+                  driver = character(),
+                  dsn = character(),
+                  scanned_at = as.POSIXct(character())
+                ),
+                "scranned.parquet"
+              )
+            }
+          '
+
+      - name: Scan batch
+        run: |
+          Rscript inst/scripts/scan-batch.R ${{ github.event.inputs.batch_size || '100' }}
+
+      - name: Upload catalog to release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: catalog
+          name: CRAN Spatial Data Catalog
+          files: scranned.parquet
+          body: |
+            Catalog of GDAL-readable files in CRAN packages.
+
+            Updated: ${{ github.event.head_commit.timestamp || github.event.repository.pushed_at }}
+
+            Download and query with:
+            ```r
+            arrow::read_parquet("https://github.com/hypertidy/vsils/releases/download/catalog/scranned.parquet")
+            ```
