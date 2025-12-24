@@ -2,7 +2,7 @@ name: Scan CRAN packages
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # 3am UTC daily
+    - cron: '0 */4 * * *'
   workflow_dispatch:
     inputs:
       batch_size:
@@ -13,22 +13,48 @@ on:
 jobs:
   scan:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/osgeo/gdal:ubuntu-full-latest
+
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      # Prevent gdalraster from trying to download GDAL
+      GDALRASTER_USE_SYSTEM_GDAL: true
 
     steps:
       - uses: actions/checkout@v4
 
-      - uses: r-lib/actions/setup-r@v2
-        with:
-          use-public-rspm: true
+      - name: Install R and dependencies
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            r-base \
+            r-base-dev \
+            libcurl4-openssl-dev \
+            libssl-dev \
+            libxml2-dev \
+            libfontconfig1-dev \
+            libharfbuzz-dev \
+            libfribidi-dev \
+            libfreetype6-dev \
+            libpng-dev \
+            libtiff5-dev \
+            libjpeg-dev \
+            git
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: |
-            any::arrow
-            any::gh
-            local::.
+      - name: Install R packages
+        run: |
+          Rscript -e '
+            install.packages(c("remotes", "arrow", "gh", "purrr", "dplyr", "tibble", "memoise"),
+                             repos = "https://cloud.r-project.org")
+            remotes::install_local(".", dependencies = FALSE)
+          '
+
+      - name: Verify GDAL
+        run: |
+          gdalinfo --version
+          Rscript -e 'gdalraster::gdal_version()'
+          Rscript -e 'length(gdalraster::gdal_drivers()$name)'
 
       - name: Download previous catalog
         run: |
@@ -60,7 +86,7 @@ jobs:
 
       - name: Scan batch
         run: |
-          Rscript inst/scripts/scan-batch.R ${{ github.event.inputs.batch_size || '100' }}
+          Rscript inst/scripts/scan-batch.R ${{ github.event.inputs.batch_size || '500' }}
 
       - name: Upload catalog to release
         uses: softprops/action-gh-release@v2
@@ -71,9 +97,9 @@ jobs:
           body: |
             Catalog of GDAL-readable files in CRAN packages.
 
-            Updated: ${{ github.event.head_commit.timestamp || github.event.repository.pushed_at }}
+            Built with GDAL ubuntu-full-latest (all drivers).
 
-            Download and query with:
-            ```r
+            Download and query:
+```r
             arrow::read_parquet("https://github.com/hypertidy/vsils/releases/download/catalog/scranned.parquet")
-            ```
+```

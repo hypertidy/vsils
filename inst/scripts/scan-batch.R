@@ -15,7 +15,7 @@ message(sprintf("Loaded catalog: %d rows, %d packages",
                 nrow(scanned), n_distinct(scanned$package)))
 
 # Get current CRAN state
-db <- vsils:::cran_package_db()
+db <- cran_package_db()
 current <- tibble::tibble(
   package = db$Package,
   version = db$Version
