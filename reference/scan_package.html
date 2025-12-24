@@ -89,30 +89,111 @@ incorrectly match spatial weights files (.gal, .gwt).</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">scan_package</span><span class="op">(</span><span class="st">"gdalraster"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GDAL WARNING 1: HTTP response code on https://cran.rstudio.comsrc/contrib/gdalraster_2.4.0.tar.gz: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 31 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    package    driver      dsn                                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> gdalraster CSV         /vsitar//vsicurl/https://cran.rstudio.com/src/contrib…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> gdalraster CSV         /vsitar//vsicurl/https://cran.rstudio.com/src/contrib…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> gdalraster CSV         /vsitar//vsicurl/https://cran.rstudio.com/src/contrib…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> gdalraster CSV         /vsitar//vsicurl/https://cran.rstudio.com/src/contrib…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> gdalraster netCDF      /vsitar//vsicurl/https://cran.rstudio.com/src/contrib…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> gdalraster GTiff       /vsitar//vsicurl/https://cran.rstudio.com/src/contrib…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> gdalraster GTiff       /vsitar//vsicurl/https://cran.rstudio.com/src/contrib…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> gdalraster OpenFileGDB /vsitar//vsicurl/https://cran.rstudio.com/src/contrib…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> gdalraster GPKG        /vsitar//vsicurl/https://cran.rstudio.com/src/contrib…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> gdalraster GTiff       /vsitar//vsicurl/https://cran.rstudio.com/src/contrib…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 21 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Scan multiple packages</span></span></span>
 <span class="r-in"><span><span class="va">packages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"spData"</span>, <span class="st">"gdalraster"</span>, <span class="st">"sf"</span>, <span class="st">"terra"</span>, <span class="st">"stars"</span>, <span class="st">"vapour"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">packages</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/possibly.html" class="external-link">possibly</a></span><span class="op">(</span><span class="va">scan_package</span>, <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GDAL WARNING 1: HTTP response code on https://cran.rstudio.comsrc/contrib/spData_2.3.4.tar.gz: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GDAL WARNING 1: HTTP response code on https://cran.rstudio.comsrc/contrib/sf_1.0-23.tar.gz: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GDAL WARNING 1: HTTP response code on https://cran.rstudio.comsrc/contrib/terra_1.8-86.tar.gz: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GDAL WARNING 1: HTTP response code on https://cran.rstudio.comsrc/contrib/stars_0.7-0.tar.gz: 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> GDAL WARNING 1: HTTP response code on https://cran.rstudio.comsrc/contrib/vapour_0.15.0.tar.gz: 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GDAL FAILURE 1: PROJ: proj_create: unrecognized format / unknown name</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># reference a discovered file directly</span></span></span>
 <span class="r-in"><span><span class="va">gpkg</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">results</span>, <span class="va">package</span> <span class="op">==</span> <span class="st">"spData"</span>, <span class="va">driver</span> <span class="op">==</span> <span class="st">"GPKG"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">1L</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in dplyr::filter(results, package == "spData", driver == "GPKG"):</span> <span style="color: #00BBBB;">ℹ</span> In argument: `package == "spData"`.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> object 'package' not found</span>
 <span class="r-in"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu">new</span><span class="op">(</span><span class="fu">gdalraster</span><span class="fu">::</span><span class="va"><a href="https://firelab.github.io/gdalraster/reference/GDALVector-class.html" class="external-link">GDALVector</a></span>, <span class="va">gpkg</span><span class="op">$</span><span class="va">dsn</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'gpkg' not found</span>
 <span class="r-in"><span><span class="va">v</span><span class="op">$</span><span class="fu">info</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'v' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> INFO: Open of `/vsitar//vsicurl/https://cran.rstudio.com/src/contrib/spData_2.3.4.tar.gz/spData/inst/shapes/NY8_bna_utm18.gpkg'</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       using driver `GPKG' successful.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Layer name: sf_bna2_utm18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Geometry: Multi Polygon</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Feature Count: 281</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Extent: (357628.000000, 4649540.000000) - (480360.000000, 4808320.000000)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Layer SRS WKT:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> BOUNDCRS[</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     SOURCECRS[</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         PROJCRS["UTM Zone 18, Northern Hemisphere",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             BASEGEOGCRS["Clarke 1866",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 DATUM["unknown",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     ELLIPSOID["clrk66",6378206.4,294.978698213898,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         LENGTHUNIT["metre",1,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             ID["EPSG",9001]]]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 PRIMEM["Greenwich",0,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     ANGLEUNIT["degree",0.0174532925199433]]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             CONVERSION["UTM zone 18N",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 METHOD["Transverse Mercator",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     ID["EPSG",9807]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 PARAMETER["Latitude of natural origin",0,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     ANGLEUNIT["degree",0.0174532925199433],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     ID["EPSG",8801]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 PARAMETER["Longitude of natural origin",-75,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     ANGLEUNIT["degree",0.0174532925199433],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     ID["EPSG",8802]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 PARAMETER["Scale factor at natural origin",0.9996,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     SCALEUNIT["unity",1],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     ID["EPSG",8805]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 PARAMETER["False easting",500000,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     LENGTHUNIT["Meter",1],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     ID["EPSG",8806]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 PARAMETER["False northing",0,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     LENGTHUNIT["Meter",1],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     ID["EPSG",8807]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 ID["EPSG",16018]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             CS[Cartesian,2],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 AXIS["(E)",east,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     ORDER[1],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     LENGTHUNIT["Meter",1]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 AXIS["(N)",north,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     ORDER[2],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     LENGTHUNIT["Meter",1]]]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     TARGETCRS[</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         GEOGCRS["WGS 84",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             DATUM["World Geodetic System 1984",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 ELLIPSOID["WGS 84",6378137,298.257223563,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     LENGTHUNIT["metre",1]]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             PRIMEM["Greenwich",0,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 ANGLEUNIT["degree",0.0174532925199433]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             CS[ellipsoidal,2],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 AXIS["latitude",north,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     ORDER[1],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     ANGLEUNIT["degree",0.0174532925199433]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 AXIS["longitude",east,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     ORDER[2],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     ANGLEUNIT["degree",0.0174532925199433]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ID["EPSG",4326]]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     ABRIDGEDTRANSFORMATION["Clarke 1866 to WGS84",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         METHOD["NTv2",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ID["EPSG",9615]],</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         PARAMETERFILE["Latitude and longitude difference file","@conus,@alaska,@ntv2_0.gsb,@ntv1_can.dat",</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             ID["EPSG",8656]]]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Data axis to CRS axis mapping: 1,2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> FID Column = fid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Geometry Column = geom</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AREAKEY: String (0.0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AREANAME: String (0.0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> X: Real (0.0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Y: Real (0.0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> POP8: Real (0.0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> TRACTCAS: Real (0.0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> PROPCAS: Real (0.0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> PCTOWNHOME: Real (0.0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> PCTAGE65P: Real (0.0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Z: Real (0.0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AVGIDIST: Real (0.0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> PEXPOSURE: Real (0.0)</span>
 <span class="r-in"><span><span class="va">v</span><span class="op">$</span><span class="fu">close</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'v' not found</span>
 </code></pre></div>
     </div>
   </div>
