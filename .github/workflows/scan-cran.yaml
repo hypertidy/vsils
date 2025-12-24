@@ -42,14 +42,14 @@ jobs:
 
       - name: Install gdalraster
         run: |
-          'which gdal-config || echo "gdal-config not found"
+          which gdal-config || echo "gdal-config not found"
           gdal-config --version || true
           gdal-config --libs || true
           Rscript -e 'install.packages("gdalraster", repos = "https://cloud.r-project.org", verbose = TRUE)'
 
       - name: Install R packages
         run: |
-           Rscript -e '
+          Rscript -e '
             install.packages("remotes", repos = "https://cloud.r-project.org")
             remotes::install_local(".", dependencies = TRUE, upgrade = "never")
           '
