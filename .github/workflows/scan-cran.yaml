@@ -40,6 +40,13 @@ jobs:
             libjpeg-dev \
             git
 
+      - name: Install gdalraster
+        run: |
+          which gdal-config || echo "gdal-config not found"
+          gdal-config --version || true
+          gdal-config --libs || true
+          Rscript -e 'install.packages("gdalraster", repos = "https://cloud.r-project.org", verbose = TRUE)'
+
       - name: Install R packages
         run: |
            Rscript -e '
