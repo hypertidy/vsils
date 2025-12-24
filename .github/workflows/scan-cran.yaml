@@ -50,7 +50,7 @@ jobs:
       - name: Install R packages
         run: |
           Rscript -e '
-            install.packages("remotes", repos = "https://cloud.r-project.org")
+            install.packages(c("remotes", "arrow", "gh"), repos = "https://cloud.r-project.org")
             remotes::install_local(".", dependencies = TRUE, upgrade = "never")
           '
 
