@@ -7,7 +7,7 @@ on:
     inputs:
       batch_size:
         description: 'Number of packages to scan'
-        default: '100'
+        default: '500'
         required: false
 
 jobs:
