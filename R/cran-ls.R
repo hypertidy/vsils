@@ -69,7 +69,7 @@ scan_package <- function(package) {
   if (length(paths) < 1L) return(NULL)
   uris <- paste0(base_uri, "/", paths)
 
-  purrr::map_chr(uris, \(u) identify_safe(u)) |>
+  out <- purrr::map_chr(uris, \(u) identify_safe(u)) |>
     purrr::set_names(paths) |>
     {\(x) x[!is.na(x)]}() |>
     tibble::enframe(name = "path", value = "driver") |>
@@ -79,6 +79,8 @@ scan_package <- function(package) {
       dsn = paste0(base_uri, "/", path)
     ) |>
     dplyr::select(package,  driver, dsn)
+  if (nrow(out) < 1) stop(sprintf("no GDAL readable files found in %s", package))
+  out
 }
 
 
@@ -87,6 +89,7 @@ package_source_url <- function(package, cran = getOption("repos")[["CRAN"]]) {
   if (is.null(cran) || cran == "@CRAN@") {
     cran <- "https://cloud.r-project.org/"
   }
+  if (!grepl("/$", cran)) cran <- sprintf("%s/", cran)
   db <- cran_package_db()
   idx <- match(package, db$Package)
   if (is.na(idx) || length(idx) < 1L) stop(sprintf("no package found '%s' on '%s'", package, cran))
