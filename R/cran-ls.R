@@ -89,11 +89,12 @@ package_source_url <- function(package, cran = getOption("repos")[["CRAN"]]) {
   if (is.null(cran) || cran == "@CRAN@") {
     cran <- "https://cloud.r-project.org/"
   }
-  if (!grepl("/$", cran)) cran <- sprintf("%s/", cran)
+  cran <- sub("/$", "", cran)
+
   db <- cran_package_db()
   idx <- match(package, db$Package)
   if (is.na(idx) || length(idx) < 1L) stop(sprintf("no package found '%s' on '%s'", package, cran))
-  sprintf("%ssrc/contrib/%s_%s.tar.gz", cran, package, db$Version[idx])
+  sprintf("%s/src/contrib/%s_%s.tar.gz", cran, package, db$Version[idx])
 }
 package_gdal_uri <- function(package) {
   sprintf("/vsitar//vsicurl/%s", package_source_url(package))

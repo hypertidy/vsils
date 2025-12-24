@@ -8,6 +8,14 @@
 \description{
 Queries a package source tarball directly from CRAN (via 'GDAL' virtual file system) and identifies files that 'GDAL' can read. No package or file download is required.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/hypertidy/vsils}
+  \item Report bugs at \url{https://github.com/hypertidy/vsils/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Michael Sumner \email{mdsumner@gmail.com} (\href{https://orcid.org/0000-0002-2471-7511}{ORCID})
 
