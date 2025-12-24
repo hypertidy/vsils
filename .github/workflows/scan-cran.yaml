@@ -58,7 +58,7 @@ jobs:
         run: |
           gdalinfo --version
           Rscript -e 'gdalraster::gdal_version()'
-          Rscript -e 'length(gdalraster::gdal_drivers()$name)'
+          Rscript -e 'length(gdalraster::gdal_version_num())'
 
       - name: Download previous catalog
         run: |
