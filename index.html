@@ -87,6 +87,28 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hypertidy/vsils" class="external-link">vsils</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/scan_package.html">scan_package</a></span><span class="op">(</span><span class="st">"spData"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 19 × 3</span></span>
+<span><span class="co">#&gt;    package driver         dsn                                                   </span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;          &lt;chr&gt;                                                 </span></span>
+<span><span class="co">#&gt;  1 spData  CSV            /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
+<span><span class="co">#&gt;  2 spData  ESRI Shapefile /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
+<span><span class="co">#&gt;  3 spData  ESRI Shapefile /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
+<span><span class="co">#&gt;  4 spData  CSV            /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
+<span><span class="co">#&gt;  5 spData  CSV            /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
+<span><span class="co">#&gt;  6 spData  GTiff          /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
+<span><span class="co">#&gt;  7 spData  GTiff          /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
+<span><span class="co">#&gt;  8 spData  GPKG           /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
+<span><span class="co">#&gt;  9 spData  GPKG           /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
+<span><span class="co">#&gt; 10 spData  GPKG           /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
+<span><span class="co">#&gt; 11 spData  GPKG           /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
+<span><span class="co">#&gt; 12 spData  GPKG           /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
+<span><span class="co">#&gt; 13 spData  GeoJSON        /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
+<span><span class="co">#&gt; 14 spData  GeoJSON        /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
+<span><span class="co">#&gt; 15 spData  GPKG           /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
+<span><span class="co">#&gt; 16 spData  GPKG           /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
+<span><span class="co">#&gt; 17 spData  GPKG           /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
+<span><span class="co">#&gt; 18 spData  GPKG           /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
+<span><span class="co">#&gt; 19 spData  PNG            /vsitar//vsicurl/https://CRAN.r-project.org/src/contr…</span></span>
 <span><span class="co">#&gt; # A tibble: 20 × 3</span></span>
 <span><span class="co">#&gt;    package driver  dsn</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;</span></span>
@@ -96,13 +118,42 @@
 <span><span class="co">#&gt; # ... </span></span></code></pre></div>
 <p>Scan multiple packages:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">packages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"spData"</span>, <span class="st">"sf"</span>, <span class="st">"terra"</span>, <span class="st">"stars"</span>, <span class="st">"gdalraster"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">packages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gdalraster"</span>, <span class="st">"geotargets"</span>, <span class="st">"png"</span>, <span class="st">"sf"</span>, <span class="st">"sfdct"</span>, <span class="st">"spData"</span>, </span>
+<span><span class="st">"stars"</span>, <span class="st">"terra"</span>, <span class="st">"tidync"</span>, <span class="st">"vapour"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">packages</span>, <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/possibly.html" class="external-link">possibly</a></span><span class="op">(</span><span class="va">scan_package</span>, <span class="cn">NULL</span><span class="op">)</span>, .progress <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ■■■■ 10% | ETA: 22s ■■■■■■■ 20% | ETA: 17s ■■■■■■■■■■ 30% | ETA: 12s</span></span>
+<span><span class="co">#&gt; ■■■■■■■■■■■■■ 40% | ETA: 14s ■■■■■■■■■■■■■■■■ 50% | ETA: 12s</span></span>
+<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■ 60% | ETA: 9s ■■■■■■■■■■■■■■■■■■■■■■ 70% | ETA: 7s</span></span>
+<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■■■■ 80% | ETA: 5s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 90% | ETA:</span></span>
+<span><span class="co">#&gt; 2s</span></span>
+<span><span class="co">#&gt; GDAL FAILURE 1: PROJ: proj_create: unrecognized format / unknown name</span></span>
+<span><span class="co">#&gt; </span></span>
 <span></span>
 <span><span class="va">results</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">driver</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">driver</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 18 × 2</span></span>
+<span><span class="co">#&gt;    driver             n</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;          &lt;int&gt;</span></span>
+<span><span class="co">#&gt;  1 GTiff             31</span></span>
+<span><span class="co">#&gt;  2 ESRI Shapefile    29</span></span>
+<span><span class="co">#&gt;  3 netCDF            24</span></span>
+<span><span class="co">#&gt;  4 GPKG              22</span></span>
+<span><span class="co">#&gt;  5 PNG               10</span></span>
+<span><span class="co">#&gt;  6 CSV                9</span></span>
+<span><span class="co">#&gt;  7 GeoJSON            4</span></span>
+<span><span class="co">#&gt;  8 SQLite             4</span></span>
+<span><span class="co">#&gt;  9 OSM                3</span></span>
+<span><span class="co">#&gt; 10 GML                2</span></span>
+<span><span class="co">#&gt; 11 FlatGeobuf         1</span></span>
+<span><span class="co">#&gt; 12 HDF5               1</span></span>
+<span><span class="co">#&gt; 13 LCP                1</span></span>
+<span><span class="co">#&gt; 14 MapInfo File       1</span></span>
+<span><span class="co">#&gt; 15 OpenFileGDB        1</span></span>
+<span><span class="co">#&gt; 16 RRASTER            1</span></span>
+<span><span class="co">#&gt; 17 WMS                1</span></span>
+<span><span class="co">#&gt; 18 XYZ                1</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="open-files-directly">Open files directly<a class="anchor" aria-label="anchor" href="#open-files-directly"></a>
@@ -112,7 +163,23 @@
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/scan_package.html">scan_package</a></span><span class="op">(</span><span class="st">"spData"</span><span class="op">)</span></span>
 <span><span class="va">gpkg</span> <span class="op">&lt;-</span> <span class="va">res</span><span class="op">$</span><span class="va">dsn</span><span class="op">[</span><span class="va">res</span><span class="op">$</span><span class="va">driver</span> <span class="op">==</span> <span class="st">"GPKG"</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span></span>
-<span><span class="fu">terra</span><span class="fu">::</span><span class="fu">vect</span><span class="op">(</span><span class="va">gpkg</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">terra</span><span class="fu">::</span><span class="fu">vect</span><span class="op">(</span><span class="va">gpkg</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  class       : SpatVector </span></span>
+<span><span class="co">#&gt;  geometry    : polygons </span></span>
+<span><span class="co">#&gt;  dimensions  : 281, 12  (geometries, attributes)</span></span>
+<span><span class="co">#&gt;  extent      : 357628, 480360.3, 4649538, 4808317  (xmin, xmax, ymin, ymax)</span></span>
+<span><span class="co">#&gt;  source      : NY8_bna_utm18.gpkg (sf_bna2_utm18)</span></span>
+<span><span class="co">#&gt;  coord. ref. : UTM Zone 18, Northern Hemisphere </span></span>
+<span><span class="co">#&gt;  names       :     AREAKEY        AREANAME     X      Y  POP8 TRACTCAS  PROPCAS</span></span>
+<span><span class="co">#&gt;  type        :       &lt;chr&gt;           &lt;chr&gt; &lt;num&gt;  &lt;num&gt; &lt;num&gt;    &lt;num&gt;    &lt;num&gt;</span></span>
+<span><span class="co">#&gt;  values      : 36007000100 Binghamton city 4.069 -67.35  3540     3.08  0.00087</span></span>
+<span><span class="co">#&gt;                36007000200 Binghamton city 4.639 -66.86  3560     4.08 0.001146</span></span>
+<span><span class="co">#&gt;                36007000300 Binghamton city 5.709 -66.98  3739     1.09 0.000292</span></span>
+<span><span class="co">#&gt;  PCTOWNHOME PCTAGE65P       Z AVGIDIST PEXPOSURE</span></span>
+<span><span class="co">#&gt;       &lt;num&gt;     &lt;num&gt;   &lt;num&gt;    &lt;num&gt;     &lt;num&gt;</span></span>
+<span><span class="co">#&gt;      0.3277    0.1466   0.142   0.2374     3.167</span></span>
+<span><span class="co">#&gt;      0.4268    0.2351  0.3555   0.2087     3.039</span></span>
+<span><span class="co">#&gt;      0.3377     0.138 -0.5817   0.1709     2.838</span></span></code></pre></div>
 <p>No download required — GDAL streams the data directly from CRAN.</p>
 </div>
 <div class="section level2">
@@ -122,6 +189,14 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>AAIGrid, CSV, ESRI Shapefile, FlatGeobuf, GML, GPKG, GTiff, </span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>GeoJSON, HDF5, LCP, MapInfo File, OSM, OpenFileGDB, PNG, </span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>RRASTER, SQLite, WMS, XYZ, netCDF</span></code></pre></div>
+<p>E.g.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">driver</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  [1] "CSV"            "ESRI Shapefile" "FlatGeobuf"     "GeoJSON"       </span></span>
+<span><span class="co">#&gt;  [5] "GML"            "GPKG"           "GTiff"          "HDF5"          </span></span>
+<span><span class="co">#&gt;  [9] "LCP"            "MapInfo File"   "netCDF"         "OpenFileGDB"   </span></span>
+<span><span class="co">#&gt; [13] "OSM"            "PNG"            "RRASTER"        "SQLite"        </span></span>
+<span><span class="co">#&gt; [17] "WMS"            "XYZ"</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="notes">Notes<a class="anchor" aria-label="anchor" href="#notes"></a>
