@@ -28,7 +28,7 @@ pak::pak("mdsumner/vsils")
 ## Example
 
 Scan a single package:
-```{r example, eval = FALSE}
+```{r example, eval = TRUE}
 library(vsils)
 
 scan_package("spData")
@@ -42,8 +42,9 @@ scan_package("spData")
 ```
 
 Scan multiple packages:
-```{r multi, eval = FALSE}
-packages <- c("spData", "sf", "terra", "stars", "gdalraster")
+```{r multi, eval = TRUE}
+packages <- c("gdalraster", "geotargets", "png", "sf", "sfdct", "spData", 
+"stars", "terra", "tidync", "vapour")
 
 results <- purrr::map(packages, purrr::possibly(scan_package, NULL), .progress = TRUE) |>
   purrr::list_rbind()
@@ -54,7 +55,7 @@ results |>
 ## Open files directly
 
 The `dsn` column works with any GDAL-based tool:
-```{r open, eval = FALSE}
+```{r open, eval = TRUE}
 res <- scan_package("spData")
 gpkg <- res$dsn[res$driver == "GPKG"][1]
 
@@ -73,7 +74,11 @@ GeoJSON, HDF5, LCP, MapInfo File, OSM, OpenFileGDB, PNG,
 RRASTER, SQLite, WMS, XYZ, netCDF
 ```
 
+E.g. 
 
+```{r drivers}
+print(sort(unique(results$driver)))
+```
 
 ## Notes
 - Some false positives occur (e.g. CSV, PNG logos, XYZ matching spatial weights files)

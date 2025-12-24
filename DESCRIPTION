@@ -22,5 +22,6 @@ Imports:
 URL: https://github.com/hypertidy/vsils
 BugReports: https://github.com/hypertidy/vsils/issues
 Suggests: 
+    curl,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
