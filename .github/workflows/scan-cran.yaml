@@ -42,10 +42,9 @@ jobs:
 
       - name: Install R packages
         run: |
-          Rscript -e '
-            install.packages(c("remotes", "arrow", "gh", "purrr", "dplyr", "tibble", "memoise"),
-                             repos = "https://cloud.r-project.org")
-            remotes::install_local(".", dependencies = FALSE)
+           Rscript -e '
+            install.packages("remotes", repos = "https://cloud.r-project.org")
+            remotes::install_local(".", dependencies = TRUE, upgrade = "never")
           '
 
       - name: Verify GDAL
