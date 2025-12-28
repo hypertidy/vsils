@@ -20,6 +20,8 @@ current <- tibble::tibble(
   package = db$Package,
   version = db$Version
 )
+
+
 message(sprintf("CRAN has %d packages", nrow(current)))
 
 # Find packages needing scan (new or updated version)
@@ -64,6 +66,7 @@ results <- purrr::map(seq_len(nrow(batch)), function(i) {
   })
 }) |> purrr::list_rbind()
 
+if (nrow(results) > 0) {
 message(sprintf("Scanned %d files from %d packages",
                 sum(!is.na(results$driver)), n_distinct(results$package)))
 
@@ -79,7 +82,8 @@ message(sprintf("Catalog now has %d rows, %d packages",
 
 # Summary
 message("\nDriver counts this batch:")
-#results |>
-#  filter(!is.na(driver)) |>
-#  count(driver, sort = TRUE) |>
-#  print(n = 20)
+results |>
+  filter(!is.na(driver)) |>
+  count(driver, sort = TRUE) |>
+ print(n = 20)
+  }
