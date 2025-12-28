@@ -79,7 +79,7 @@ message(sprintf("Catalog now has %d rows, %d packages",
 
 # Summary
 message("\nDriver counts this batch:")
-results |>
-  filter(!is.na(driver)) |>
-  count(driver, sort = TRUE) |>
-  print(n = 20)
+#results |>
+#  filter(!is.na(driver)) |>
+#  count(driver, sort = TRUE) |>
+#  print(n = 20)
