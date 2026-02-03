@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 */4 * * *'
+    - cron: '0 1 */7 * *'
   workflow_dispatch:
     inputs:
       batch_size:
@@ -13,6 +13,10 @@ on:
         default: '500'
         required: false
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+  
 jobs:
   scan:
     runs-on: ubuntu-latest
